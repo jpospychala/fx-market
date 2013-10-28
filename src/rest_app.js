@@ -52,7 +52,7 @@ set_rates = function(req, res) {
 
 app.get('/buy', not_implemented);
 app.get('/sell', not_implemented);
-app.get('/get_rates', get_rates);
+app.get('/rates', get_rates);
 app.post('/rates', set_rates);
 app.get('/brokers', get_brokers);
 app.post('/broker', not_implemented);

@@ -7,7 +7,7 @@ angular.module('clientApp')
         var counter = 0;
         
         var get_rates = function() {
-            $http.get('http://127.0.0.1:3000/get_rates').success(function(data, status, headers, config) {
+            $http.get('http://127.0.0.1:3000/rates').success(function(data, status, headers, config) {
                 var new_rates = data;
                 if ($scope.rates) {
                     for (var rate in new_rates) {
