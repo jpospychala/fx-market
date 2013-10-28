@@ -1,4 +1,3 @@
-fx-market
-=========
+FX-Market
 
-foreign exchange market in nodejs
+Micro app simulating FX market

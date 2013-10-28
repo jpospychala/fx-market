@@ -1,0 +1,65 @@
+<style>
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.marquee_bar {
+    background-color: #aaa;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.EUR {
+  fill: none;
+  stroke: maroon;
+  stroke-width: 1.5px;
+}
+.CHF {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.USD {
+  fill: none;
+  stroke: orange;
+  stroke-width: 1.5px;
+}
+.BTC {
+  fill: none;
+  stroke: darkmagenta;
+  stroke-width: 1.5px;
+}
+</style>
+<div class="marquee_bar">
+    <marquee behavior="scroll" direction="left">
+        <table>
+            <tr>
+                <td ng-repeat="rate in rates" class="lead">
+                    <span class="rate_name">{{rate.name}}</span>
+                    <span ng-class="{red: rate.delta < 0, green: rate.delta > 0}">{{rate.price|number:2}}</span>
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    </marquee>
+</div>
+
+<h1>History</h1>
