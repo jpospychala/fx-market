@@ -25,7 +25,7 @@ expect = function(obj, fields) {
     var res = {};
     for (f in fields) {
         var field = fields[f];
-        if (! obj[field]) {
+        if (obj[field] === undefined) {
             throw 'Required property '+field+' is missing';
         }
         res[field] = obj[field];
@@ -52,7 +52,7 @@ get = function(fn) {
 post = function(modelProvider, handler) {
     return function(req, res) {
         try {
-            var model = modelProvider(req.body);
+            var model = modelProvider(req.body, req);
             var resp = handler(model);            
             json(res, resp);
         } catch (ex) {
@@ -73,6 +73,21 @@ has_admin_token = function(fn) {
     };
 }
 
+has_broker_secret = function(fn) {
+    return function(req, res) {
+        var req_broker_secret = req.headers['broker_secret'];
+        var req_broker_name = req.headers['broker_name'];
+        if (req_broker_secret && req_broker_name) {
+            var broker = market.brokers.get(req_broker_name);
+            if (broker && (broker.secret === req_broker_secret)) {
+                return fn(req, res);
+            }
+        }
+        res.statusCode = 401;
+        json(res, {'error': 'not authorized'});
+    };
+}
+
 to_products = function(obj) {
     var prods = [];
     for (var name in obj) {
@@ -87,8 +102,10 @@ to_broker = function(dirty_obj) {
     return new model.Broker(obj.name, obj.secret, STARTING_MONEY);
 };
 
-to_transaction = function(dirty_obj) {
-    return expect(dirty_obj, ['broker_name', 'product_name', 'amount', 'unit_price_min', 'unit_price_max']);
+to_transaction = function(dirty_obj, req) {
+    var clean_obj = expect(dirty_obj, ['product_name', 'amount', 'unit_price_min', 'unit_price_max']);
+    clean_obj['broker_name'] = req.headers['broker_name'];
+    return clean_obj;
 };
 
 set_rates = function(prods) {
@@ -116,8 +133,8 @@ var ADMIN_TOKEN = uuid.v4();
 var STARTING_MONEY = 1000;
 var market = new model.Market();
 
-app.post('/buy', post(to_transaction, buy));
-app.post('/sell', post(to_transaction, sell));
+app.post('/buy', has_broker_secret(post(to_transaction, buy)));
+app.post('/sell', has_broker_secret(post(to_transaction, sell)));
 app.get('/rates', get(function() {return market.products.list(); }));
 app.post('/rates', has_admin_token(post(to_products, set_rates)));
 app.get('/brokers', get(function() {return market.brokers.list(); }));

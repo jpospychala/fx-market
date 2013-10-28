@@ -8,7 +8,11 @@ rest_post = function(obj) {
         'hostname': '127.0.0.1',
         'port':'3000',
         'path':'/rates',
-        'method':'POST'}, function(res) {});
+        'method':'POST'}, function(res) {
+            if (res.statusCode != 200) {
+                console.log(res.statusCode);
+            }
+        });
     req.on('error', function(e) {
         console.log('problem with request', e);
     });
