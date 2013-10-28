@@ -8,6 +8,12 @@ function Resource(type) {
 		this.items[item.name] = item;
 	}
 	
+	this.addAll = function(items) {
+	    for (item in items) {
+	        this.add(items[item]);
+	    }
+	}
+	
 	this.remove = function(name) {
 		delete this.items[name];
 	}
@@ -22,12 +28,27 @@ function Resource(type) {
 }
 
 function Product(name, price, amount) {
+    if (! name) {
+        throw 'Product must have name';
+    }
+    if (! price) {
+        throw 'Product must have price';
+    }
 	this.name = name;
 	this.price = price;
 	this.amount = amount;
 }
 
 function Broker(name, secret, money) {
+    if (! name) {
+        throw 'Broker must have name';
+    };
+    if (! secret) {
+        throw 'Broker must have secret';
+    };
+    if (! money) {
+        throw 'Broker must have money';
+    }
 	this.name = name;
 	this.secret = secret;
 	this.money = money;
@@ -40,6 +61,9 @@ function Market() {
 	
 	this.buy = function(broker_name, product_name, amount, unit_price_min, unit_price_max) {
 		var prod = this.products.get(product_name);
+		if (!prod) {
+		    throw 'unknown product '+product_name;
+		}
 		
 		if ((prod.price < unit_price_min) || (prod.price > unit_price_max)) {
 			throw "price "+prod.price+" outside the range "+unit_price_min+"-"+unit_price_max;
@@ -52,6 +76,10 @@ function Market() {
 		var cost = amount * prod.price;
 		
 		var broker = this.brokers.get(broker_name);
+		if (!broker) {
+		    throw 'unknown broker '+broker_name;
+		}
+		
 		if (cost > broker.money) {
 			throw "not enough money ("+broker.money+") to buy (cost: "+cost+")";
 		}

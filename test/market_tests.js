@@ -30,6 +30,24 @@ exports['test_buy'] = function(beforeExist, assert) {
 	assert.eql(jacek.money, 0);
 }
 
+exports['test_buy_unknown_broker'] = function(beforeExist, assert) {
+    setUp();
+    
+    assert.throws(function() {
+        market.buy('fred', eur.name, 10, 1);
+    }, /unknown broker fred/);
+    assert_initial_state(assert);
+}
+
+exports['test_buy_unknown_product'] = function(beforeExist, assert) {
+    setUp();
+    
+    assert.throws(function() {
+        market.buy(jacek.name, 'coins', 10, 1);
+    }, /unknown product coins/);
+    assert_initial_state(assert);
+}
+
 exports['test_buy_not_available'] = function(beforeExist, assert) {
 	setUp();
 	

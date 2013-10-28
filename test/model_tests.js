@@ -6,7 +6,7 @@ exports['test_initial_state'] = function(beforeExist, assert) {
 }
 
 exports['type_safety'] = function(beforeExist, assert) {
-	var broker = new model.Broker('jacek', 'pass');
+	var broker = new model.Broker('jacek', 'pass', 10);
 	assert.equal(model.Broker, broker.constructor);
 }
 
