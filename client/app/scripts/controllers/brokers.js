@@ -1,10 +1,6 @@
 'use strict';
 
 angular.module('clientApp')
-  .controller('BrokersCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('BrokersCtrl', function ($scope, Fxmarket) {
+      $scope.brokers_log = Fxmarket.brokers_log;
   });

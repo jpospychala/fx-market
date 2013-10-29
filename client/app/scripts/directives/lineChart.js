@@ -15,7 +15,7 @@ angular.module('clientApp')
               
               $scope.height = height;
           
-              $scope.x = d3.scale.linear()
+              $scope.x = d3.time.scale()
                   .range([0, width]);
           
               $scope.y = d3.scale.linear()
@@ -30,8 +30,8 @@ angular.module('clientApp')
                   .orient("left");
           
               $scope.line = d3.svg.line()
-                  .x(function(d) { return $scope.x(d.i); })
-                  .y(function(d) { return $scope.y(d.price); });
+                  .x(function(d) { return $scope.x(d.x); })
+                  .y(function(d) { return $scope.y(d.y); });
           
               $scope.svg = d3.select("#"+id).append("svg")
                   .attr("width", width + margin.left + margin.right)
@@ -46,8 +46,8 @@ angular.module('clientApp')
             for (data in dataset) {
                 alldata = alldata.concat(dataset[data]);
             }
-            $scope.x.domain(d3.extent(alldata, function(d) { return d.i; }));
-            $scope.y.domain(d3.extent(alldata, function(d) { return d.price; }));
+            $scope.x.domain(d3.extent(alldata, function(d) { return d.x; }));
+            $scope.y.domain(d3.extent(alldata, function(d) { return d.y; }));
     
             $scope.svg.selectAll("*").remove();
             $scope.svg.append("g")
@@ -65,11 +65,19 @@ angular.module('clientApp')
                 .style("text-anchor", "end")
                 .text("Price");
     
+            var c = 0;
             for (var data in dataset) {
                 $scope.svg.append("path")
                     .datum(dataset[data])
-                    .attr("class", data)
-                    .attr("d", $scope.line);              
+                    .attr("class", "line")
+                    .attr("style", "stroke: "+d3.hsl(c*30, 1.0/(c+1), 0.50))
+                    .attr("d", $scope.line)
+                  .append("text")
+                    .attr("y", 6)
+                    .attr("dy", ".71em")
+                    .style("text-anchor", "middle")
+                    .text("HAHAAH");
+                c++;
             }
           };
           
