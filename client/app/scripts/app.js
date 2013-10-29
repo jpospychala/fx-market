@@ -9,6 +9,10 @@ angular.module('clientApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/brokers', {
+        templateUrl: 'views/brokers.html',
+        controller: 'BrokersCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

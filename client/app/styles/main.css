@@ -20,3 +20,52 @@ body {
     line-height: 1;
     letter-spacing: -1px;
 }
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.marquee_bar {
+    background-color: #aaa;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.EUR {
+  fill: none;
+  stroke: maroon;
+  stroke-width: 1.5px;
+}
+.CHF {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.USD {
+  fill: none;
+  stroke: orange;
+  stroke-width: 1.5px;
+}
+.BTC {
+  fill: none;
+  stroke: darkmagenta;
+  stroke-width: 1.5px;
+}
