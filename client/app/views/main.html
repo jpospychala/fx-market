@@ -1,10 +1,9 @@
-<a href="#/brokers">Brokers</a>
 <div class="marquee_bar">
     <marquee behavior="scroll" direction="left">
         <table>
             <tr>
-                <td ng-repeat="rate in rates" class="lead">
-                    <span class="rate_name">{{rate.name}}</span>
+                <td ng-repeat="(name, rate) in rates" class="lead">
+                    <span class="rate_name">{{name}}</span>
                     <span ng-class="{red: rate.delta < 0, green: rate.delta > 0}">{{rate.price|number:2}}</span>
                     &nbsp;
                 </td>
