@@ -27,12 +27,16 @@ var inc=0.01;
 var chf = 1;
 var usd = 2;
 var eur = 3;
+var bit = 1;
+var counter = 0;
 
 update_rates = function() {
-    rest_post({'CHF':chf, 'USD':usd, 'EUR':eur});
+    rest_post({'CHF':chf, 'USD':usd, 'EUR':eur, 'BIT':bit});
     chf += inc;
-    usd += inc;
-    eur += inc;
+    usd += inc*2;
+    eur += inc*3;
+    bit = 3 + 2*Math.sin(0.1*counter);
+    counter++;
 }
 
 console.log('simulate rates');

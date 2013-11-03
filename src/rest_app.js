@@ -114,7 +114,9 @@ set_rates = function(prods) {
 };
 
 set_broker = function(broker) {
-    market.brokers.add(broker);
+    if (market.brokers.get(broker.broker_name) === undefined) {
+        market.brokers.add(broker);
+    }
     return market.brokers.get(broker.name);
 };
 
