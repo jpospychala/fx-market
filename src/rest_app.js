@@ -84,7 +84,7 @@ has_broker_secret = function(fn) {
             }
         }
         res.statusCode = 401;
-        json(res, {'error': 'not authorized'});
+        json(res, {'error': 'not authorized ('+req_broker_secret+'/'+req.broker_name+')'});
     };
 }
 
