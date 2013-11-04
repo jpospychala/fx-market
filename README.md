@@ -48,6 +48,14 @@ $ node broker_bot.js Joe secret
 Market REST API
 ---------------
 
+Following API methods are available
+ - GET /brokers - Returns list of registered brokers.
+ - POST /broker - Registers new broker with given name and secret token.
+ - GET /rates - Returns list of available products.
+ - POST /rates - Sets the list of available products and their prices.
+ - POST /buy - Performs a product purchase on behalf of authenticated broker
+ - POST /sell - Performs a product sale on behalf of authenticated broker
+
 ### GET /brokers
 Returns list of registered brokers.
 
@@ -120,7 +128,7 @@ Returns list of available products.
 ```
 
 ### POST /rates
-Sets available products.
+Sets the list of available products and their prices.
 
 #### Example request
 ```
