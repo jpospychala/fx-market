@@ -23,8 +23,8 @@ get = function(url) {
     };
     
     req = http.request({
-        'hostname': '127.0.0.1',
-        'port':'3000',
+        'hostname': rest_host,
+        'port':rest_port,
         'path':url,
         'method':'GET'}, res_fn);
     req.on('error', function(e) {
@@ -53,8 +53,8 @@ post = function(url, obj, headers) {
     };
     
     req = http.request({
-        'hostname': '127.0.0.1',
-        'port':'3000',
+        'hostname': rest_host,
+        'port':rest_port,
         'path':url,
         'method':'POST'}, res_fn);
     req.on('error', function(e) {
@@ -91,4 +91,9 @@ exports.sell = function(broker_name, broker_secret, prod, amount, unit_price_min
     console.log('sell');
     headers = {'broker_name': broker_name, 'broker_secret':broker_secret};
     return post('/sell', {'product_name':prod, 'amount': amount, 'unit_price_min':unit_price_min, 'unit_price_max':unit_price_max}, headers);
+}
+
+exports.set_rest_host = function(host, port) {
+    rest_host = host;
+    rest_port = port;
 }

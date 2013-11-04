@@ -5,8 +5,8 @@ var http = require('http');
 
 rest_post = function(obj) {
     req = http.request({
-        'hostname': '127.0.0.1',
-        'port':'3000',
+        'hostname': rest_host,
+        'port':rest_port,
         'path':'/rates',
         'method':'POST'}, function(res) {
             if (res.statusCode != 200) {
@@ -35,9 +35,11 @@ update_rates = function() {
 }
 
 console.log('simulate rates');
-if (process.argv.length < 3) {
-    console.log('usage: node '+process.argv[1]+' <admin_key>');
+if (process.argv.length < 5) {
+    console.log('usage: node '+process.argv[1]+' <host> <port> <admin_key>');
     return 1;
 }
-var admin_token = process.argv[2];
+var rest_host = process.argv[2];
+var rest_port = process.argv[3];
+var admin_token = process.argv[4];
 setInterval(update_rates, 1000);

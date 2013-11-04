@@ -71,13 +71,16 @@ broker_loop = function() {
 }
 
 console.log('broker bot');
-if (process.argv.length < 4) {
-    console.log('usage: node '+process.argv[1]+' <name> <secret>');
+if (process.argv.length < 6) {
+    console.log('usage: node '+process.argv[1]+' <host> <port> <name> <secret>');
     return 1;
 }
-var broker_name = process.argv[2];
-var broker_secret = process.argv[3];
+var rest_host = process.argv[2];
+var rest_port = process.argv[3];
+var broker_name = process.argv[4];
+var broker_secret = process.argv[5];
 
+broker_api.set_rest_host(rest_host, rest_port);
 broker_api.register_broker(broker_name, broker_secret).then(function(resp) {
    model.broker = resp;
    setInterval(broker_loop, 1000);
