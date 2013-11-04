@@ -1,5 +1,5 @@
 body {
-    background: #fafafa;
+    background: #ccc;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
 }
@@ -30,7 +30,8 @@ body {
 }
 
 .marquee_bar {
-    background-color: #aaa;
+	color: white;
+    background-color: #A4C5ED;
 }
 
 .axis path,
