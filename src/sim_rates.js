@@ -23,19 +23,14 @@ rest_post = function(obj) {
     req.end();
 };
 
-var inc=0.01;
-var chf = 1;
-var usd = 2;
-var eur = 3;
-var bit = 1;
 var counter = 0;
-
 update_rates = function() {
-    rest_post({'CHF':chf, 'USD':usd, 'EUR':eur, 'BIT':bit});
-    chf += inc;
-    usd += inc*2;
-    eur += inc*3;
-    bit = 3 + 2*Math.sin(0.1*counter);
+    var chf = 1 + (counter % 4)*0.25;
+    var usd = 5 - 0.5 * (Math.round(counter/4) % 2) + 0.5 * (Math.round((counter+3)/4) % 2);
+    var eur = 1 + (Math.round(counter / 10) % 2)*2;
+    var bit = 3 + 2*Math.sin(0.1*(counter+20));
+    var sin2 = 2 + Math.sin(0.1*counter) * ((counter % 4)*0.25 + 1);
+    rest_post({'CHF':chf, 'USD':usd, 'EUR':eur, 'BIT':bit, 'SIN2': sin2});
     counter++;
 }
 
