@@ -16,27 +16,30 @@
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
 </head>
-  <body ng-app="clientApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-
-    <!-- Add your site or application content here -->
-    <div class="navbar navbar-fixed-bottom navbar-inverse">
-        <div class="navbar-inner">
-        <a class="brand" href="#">mini-market</a>
-        <ul class="nav">
-            <li><a href="#/">Rates</a></li>
-            <li><a href="#/brokers">Brokers</a></li>
-        </ul>
+  <body ng-app="clientApp" class="-webkit-full-screen">
+    <div id="body">
+        <!--[if lt IE 7]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    
+        <!--[if lt IE 9]>
+          <script src="bower_components/es5-shim/es5-shim.js"></script>
+          <script src="bower_components/json3/lib/json3.min.js"></script>
+        <![endif]-->
+    
+        <!-- Add your site or application content here -->
+        <div class="navbar navbar-fixed-bottom navbar-inverse">
+            <div class="navbar-inner">
+            <a class="brand" href="#">mini-market</a>
+            <ul class="nav">
+                <li><a href="#/">Rates</a></li>
+                <li><a href="#/brokers">Brokers</a></li>
+                <li><a href="" onclick="window.open('/', '_blank', 'fullscreen=1,location=0')"><i class="icon-fullscreen icon-white"></i></a></li>
+            </ul>
+            </div>
         </div>
+        <div ng-view=""></div>
     </div>
-    <div ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
