@@ -13,5 +13,10 @@
 </div>
 
 <h1>Rates trend</h1>
+<span ng-repeat="(name, data) in history">
+<input type="checkbox" ng-model="data.is_selected">{{name}}</input>
+</span>
+<a href="" ng-click="selectAll(true)">All</a>
+<a href="" ng-click="selectAll(false)">None</a>
 <div id="rates_chart" line-chart="history">
 </div>

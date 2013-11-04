@@ -68,6 +68,9 @@ angular.module('clientApp')
     
             var c = 0;
             for (var data in dataset) {
+                if (dataset[data].is_selected == false) {
+                    continue;
+                }
                 var color = d3.hsl(c*30, 1.0/(c+1), 0.50);
                 $scope.svg.append("path")
                     .datum(dataset[data])
