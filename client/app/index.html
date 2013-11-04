@@ -27,9 +27,16 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <a href="#/">Rates</a>
-    <a href="#/brokers">Brokers</a>
-    <div class="container" ng-view=""></div>
+    <div class="navbar navbar-fixed-bottom navbar-inverse">
+        <div class="navbar-inner">
+        <a class="brand" href="#">mini-market</a>
+        <ul class="nav">
+            <li><a href="#/">Rates</a></li>
+            <li><a href="#/brokers">Brokers</a></li>
+        </ul>
+        </div>
+    </div>
+    <div ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
