@@ -8,12 +8,13 @@ angular.module('clientApp')
       scope: {lineChart:'=lineChart'},
       controller : function($scope, $timeout) {
           
-          $scope.hook_diagram = function(id) {
-              var margin = {top: 20, right: 20, bottom: 30, left: 50},
-              width = 960 - margin.left - margin.right,
+          $scope.hook_diagram = function(id, elem) {
+              var margin = {top: 20, right: 200, bottom: 30, left: 50},
+              width = elem[0].offsetWidth - margin.left - margin.right,
               height = 500 - margin.top - margin.bottom;
               
               $scope.height = height;
+              $scope.width = width;
           
               $scope.x = d3.time.scale()
                   .range([0, width]);
@@ -67,16 +68,28 @@ angular.module('clientApp')
     
             var c = 0;
             for (var data in dataset) {
+                var color = d3.hsl(c*30, 1.0/(c+1), 0.50);
                 $scope.svg.append("path")
                     .datum(dataset[data])
                     .attr("class", "line")
-                    .attr("style", "stroke: "+d3.hsl(c*30, 1.0/(c+1), 0.50))
+                    .attr("style", "stroke: "+color)
                     .attr("d", $scope.line)
-                  .append("text")
-                    .attr("y", 6)
-                    .attr("dy", ".71em")
-                    .style("text-anchor", "middle")
-                    .text("HAHAAH");
+                    .attr('id', 'path'+data);
+                
+                $scope.svg.append("rect")
+                    .attr("x", $scope.width + 5)
+                    .attr("y", c*25 + 20)
+                    .attr("width", 15)
+                    .attr("height", 15)
+                    .style("fill", color);
+                    
+                $scope.svg.append("text")
+                    .attr("x", $scope.width + 25)
+                    .attr("y", c*25 + 32)
+                    .attr("width", 15)
+                    .attr("height", 15)
+                    .style("fill", color)
+                    .text(data);
                 c++;
             }
           };
@@ -87,7 +100,7 @@ angular.module('clientApp')
            
       },
       link: function postLink(scope, element, attrs) {
-        scope.hook_diagram(attrs.id);
+        scope.hook_diagram(attrs.id, element);
       }
     };
   });
