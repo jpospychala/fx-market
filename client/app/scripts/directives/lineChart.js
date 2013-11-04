@@ -8,9 +8,9 @@ angular.module('clientApp')
       scope: {lineChart:'=lineChart'},
       controller : function($scope, $timeout) {
           
-          $scope.hook_diagram = function(id, elem) {
+          $scope.hook_diagram = function(element) {
               var margin = {top: 20, right: 200, bottom: 30, left: 50},
-              width = elem[0].offsetWidth - margin.left - margin.right,
+              width = element[0].offsetWidth - margin.left - margin.right,
               height = 500 - margin.top - margin.bottom;
               
               $scope.height = height;
@@ -34,7 +34,7 @@ angular.module('clientApp')
                   .x(function(d) { return $scope.x(d.x); })
                   .y(function(d) { return $scope.y(d.y); });
           
-              $scope.svg = d3.select("#"+id).append("svg")
+              $scope.svg = d3.select(element[0]).append("svg")
                   .attr("width", width + margin.left + margin.right)
                   .attr("height", height + margin.top + margin.bottom)
                 .append("g")
@@ -100,7 +100,7 @@ angular.module('clientApp')
            
       },
       link: function postLink(scope, element, attrs) {
-        scope.hook_diagram(attrs.id, element);
+        scope.hook_diagram(element);
       }
     };
   });
