@@ -1,27 +1,7 @@
 /**
  * Simulate rates - updates market rates by using it's REST API.
  */
-var http = require('http');
-
-rest_post = function(obj) {
-    req = http.request({
-        'hostname': rest_host,
-        'port':rest_port,
-        'path':'/rates',
-        'method':'POST'}, function(res) {
-            if (res.statusCode != 200) {
-                console.log(res.statusCode);
-            }
-        });
-    req.on('error', function(e) {
-        console.log('problem with request', e);
-    });
-    req.setHeader('admin_token', admin_token);
-    req.setHeader('Content-Type', 'application/json');
-    var dataStr = JSON.stringify(obj);
-    req.write(dataStr);
-    req.end();
-};
+var rates_api = require('./rates_api.js');
 
 var counter = 0;
 update_rates = function() {
@@ -30,7 +10,7 @@ update_rates = function() {
     var eur = 1 + (Math.round(counter / 10) % 2)*2;
     var bit = 3 + 2*Math.sin(0.1*(counter+20));
     var sin2 = 2 + Math.sin(0.1*counter) * ((counter % 4)*0.25 + 1);
-    rest_post({'CHF':chf, 'USD':usd, 'EUR':eur, 'BIT':bit, 'SIN2': sin2});
+    rates.set_rates({'CHF':chf, 'USD':usd, 'EUR':eur, 'BIT':bit, 'SIN2': sin2});
     counter++;
 }
 
@@ -39,7 +19,9 @@ if (process.argv.length < 5) {
     console.log('usage: node '+process.argv[1]+' <host> <port> <admin_key>');
     return 1;
 }
+
 var rest_host = process.argv[2];
 var rest_port = process.argv[3];
 var admin_token = process.argv[4];
+var rates = new rates_api.Rates(rest_host, rest_port, admin_token);
 setInterval(update_rates, 1000);
