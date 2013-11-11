@@ -1,12 +1,12 @@
 /**
- * Broker Bot - an example broker doing random investments
+ * Broker API - NodeJS library for fx-market brokers
  */
 var http = require('http');
 var Deferred = require('promised-io/promise').Deferred;
 
 get = function(url) {
     var deferred = new Deferred();
-    res_fn = function(res) {
+    var res_fn = function(res) {
         res.setEncoding('utf8');
         var all_data = '';
         res.on('data', function(data) {
