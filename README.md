@@ -35,7 +35,7 @@ $ grunt server
 
 ```
 $ cd src
-$ node sim_rates.js 127.0.0.1 3000 8488422b-0621-4ccb-b455-70a32115cd21
+$ node rates_simulator.js 127.0.0.1 3000 8488422b-0621-4ccb-b455-70a32115cd21
 ```
 
 4. start FX market bot:
