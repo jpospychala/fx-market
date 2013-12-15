@@ -69,6 +69,9 @@ function Market() {
 			throw "price "+prod.price+" outside the range "+unit_price_min+"-"+unit_price_max;
 		}
 		
+		amount = parseInt(amount)
+		unit_price_min = parseInt(unit_price_min)
+		unit_price_max = parseInt(unit_price_max)
 		if (amount > prod.amount) {
 			throw "trying to buy more ("+amount+") than available ("+prod.amount+")";
 		}
