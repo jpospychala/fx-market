@@ -19,6 +19,7 @@ Usage
 
 ```
 $ cd src
+$ npm install
 $ node rest_app.js
 fx-market is listening on http://127.0.0.1:3000
 admin_token = 8488422b-0621-4ccb-b455-70a32115cd21
